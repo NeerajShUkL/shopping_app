@@ -63,12 +63,10 @@ const Home: React.FC = () => {
               </Select>
             </>
           </FormControl>
-        </Box>
-        <Box display="inline" text-align="Right">
           <FormControl sx={{ m: 1, width: 250 }}>
             <>
               <InputLabel id="demo-simple-select-label">
-                All Category
+                Priceing
               </InputLabel>
               <Select
                 labelId="demo-simple-select-label"

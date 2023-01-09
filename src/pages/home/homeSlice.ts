@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction , createAsyncThunk} from '@reduxjs/toolkit'
 
 export interface HomeState {
 
@@ -7,6 +7,8 @@ export interface HomeState {
   const initialState: HomeState = {
     
   }
+
+  // export const fetchProdudctData = createAsyncThunk()
   
   export const HomeSlice = createSlice({
     name: 'home',
