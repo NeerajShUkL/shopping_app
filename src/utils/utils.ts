@@ -1,0 +1,1 @@
+export const PRODUCT_API: string = "paste product api"
