@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -9,29 +10,88 @@ import {
   Typography,
 } from "@mui/material";
 import { ReactNode, useState } from "react";
-
-const categories: string[] = [
-  "electronics",
-  "jewelery",
-  "men's clothing",
-  "women's clothing",
-];
+import { useDispatch, useSelector } from "react-redux";
+import {
+  AppDispatch,
+  fetchCartProdudctData,
+  fetchProdudctData,
+  fetchProdudctDataCategory,
+  RootState,
+  setCategory,
+} from "../../store/store";
+import { Product } from "../../types";
+import ItemCard from "../card/ItemCard";
+import { categories, filterGrid, productCardGrid } from "..";
 
 const Home: React.FC = () => {
- const [value, setValue] = useState<string>("")
+  // const [value, setValue] = useState<string>("");
 
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleSelectedCategory = (e: SelectChangeEvent<string>, child: ReactNode) => {
-    console.log(e.target.value)
-    setValue(prev => e.target.value as string)
-  }
+  const { products, category } = useSelector((state: RootState) => state.home);
+  const { cartItem, cartProduct } = useSelector(
+    (state: RootState) => state.cart
+  );
 
+  console.log("cI", cartItem);
+  console.log("cp", cartProduct);
+
+  const handleSelectedCategory = (
+    e: SelectChangeEvent<string>,
+    child: ReactNode
+  ) => {
+    dispatch(setCategory(e.target.value as string));
+  };
+
+  // console.log("cat", category)
+
+  useEffect(() => {
+    if (category !== "") {
+      dispatch(fetchProdudctDataCategory(category));
+    } else {
+      dispatch(fetchProdudctData());
+    }
+  }, [category]);
+
+  useEffect(() => {
+    if (cartItem) {
+      cartItem.map((id: number) => dispatch(fetchCartProdudctData(id)));
+    }
+  }, [cartItem]);
+
+  const cardContainer =
+    products &&
+    products?.map((productData: Product) => {
+      let bool = false;
+      cartItem.map((fid: number) => {
+        if (fid === productData.id) {
+          bool = true;
+        }
+      });
+      return (
+        <Grid
+          sx={productCardGrid}
+          item
+          xs={12}
+          sm={5}
+          md={3}
+          key={productData.id}
+        >
+          <ItemCard
+            id={productData.id}
+            addInCart={bool}
+            title={productData.title}
+            image={productData.image}
+            price={productData.price}
+          />
+        </Grid>
+      );
+    });
+
+  console.log("products", products);
   return (
-    <Box sx={{ flexGrow: 1, mx: "auto", marginTop: 10, p: 3 }}>
-      <Grid
-        container
-        sx={{ justifyContent: "space-between", width: "100%", marginBottom: 2 }}
-      >
+    <Box sx={{ flexGrow: 1, m: "auto", marginTop: 3, p: 3 }}>
+      <Grid container sx={filterGrid}>
         <Typography
           display="inline"
           text-align="left"
@@ -49,7 +109,7 @@ const Home: React.FC = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={value}
+                value={category}
                 label="Release Year"
                 onChange={handleSelectedCategory}
               >
@@ -64,6 +124,13 @@ const Home: React.FC = () => {
             </>
           </FormControl>
         </Box>
+      </Grid>
+      <Grid
+        container
+        sx={{ justifyContent: "center", alignItems: "center" }}
+        spacing={2}
+      >
+        {cardContainer}
       </Grid>
     </Box>
   );

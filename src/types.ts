@@ -13,6 +13,29 @@ export interface LoginCredential {
     password: string,
 }
 
-export interface CardData {
-    
-}
+export interface Rating {
+    rate: number,
+    count: number,
+  }
+  export interface Product {
+    id: number,
+    title: string,
+    price: string,
+    category: string,
+    description: string,
+    image: string,
+    rating: Rating,
+  }
+  
+  export interface HomeState {
+      products: Product[],
+      category: string,
+    }
+
+    export interface IitemCard {
+      id: number,
+      addInCart: boolean,
+      title: string,
+      image: string,
+      price: string,
+    }
