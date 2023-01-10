@@ -63,28 +63,6 @@ const Home: React.FC = () => {
               </Select>
             </>
           </FormControl>
-          <FormControl sx={{ m: 1, width: 250 }}>
-            <>
-              <InputLabel id="demo-simple-select-label">
-                Priceing
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={value}
-                label="Release Year"
-                onChange={handleSelectedCategory}
-              >
-                {categories.map((category) => {
-                  return (
-                    <MenuItem key={category} value={category}>
-                      {category}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </>
-          </FormControl>
         </Box>
       </Grid>
     </Box>
