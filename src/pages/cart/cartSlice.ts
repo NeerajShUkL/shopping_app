@@ -5,24 +5,18 @@ import { PRODUCT_API } from '../../utils/utils'
 
 export interface CartState {
     cartItem: number[],
-    cartProduct: Product[],
+    cartProduct: IitemCard[],
+    totalPrice: number,
   }
   
   const initialState: CartState = {
     cartItem: [],
-    cartProduct: []
+    cartProduct: [],
+    totalPrice: 0,
   }
   
   console.log("icis", initialState.cartItem)
 
-  export const fetchCartProdudctData = createAsyncThunk(
-    'users/fetchCartProdudctData',
-    async (id: number) => {
-      const response = await axios.get(`${PRODUCT_API}/${id}`)
-                       .then(res => res.data)
-       return response
-    }
-  )
 
   export const cartSlice = createSlice({
     name: 'cart',
@@ -39,16 +33,25 @@ export interface CartState {
           1
         );
       },
+      addCartProduct: (state, action: PayloadAction<IitemCard>) => {
+        console.log("ciinS", action.payload)
+        state.cartProduct?.push(action.payload)
+      },
+      removeCartProduct: (state, action: PayloadAction<number>) => {
+        console.log("ciinS", action.payload)
+        state.cartProduct?.splice(
+          state.cartProduct?.findIndex((fid: IitemCard) => fid.id === action.payload),
+          1
+        );
+      },
+      addTotalPrice: (state) => {
+        state.totalPrice = state.cartProduct?. reduce( (accumulator, item) => { return accumulator + Number(item. price); }, 0);
+      }
+      
      },
-    extraReducers: (builder) => {
-      builder.addCase(fetchCartProdudctData.fulfilled, (state, action: PayloadAction<Product>) => {
-        const newCartProduct = initialState.cartProduct
-        // console.log("abc", newCartProduct)
-        state.cartProduct = [...newCartProduct , action.payload]
-      })
-    },
+   
   })
   
-  export const { addCartItem, removeCartItem } = cartSlice.actions
+  export const { addCartItem, removeCartItem, addCartProduct, removeCartProduct, addTotalPrice } = cartSlice.actions
   
   export default cartSlice.reducer

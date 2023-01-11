@@ -9,9 +9,9 @@ import {
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import { useDispatch, useSelector } from "react-redux";
-import { addCartItem, AppDispatch, fetchCartProdudctData, removeCartItem, RootState } from "../../store/store";
+import { addCartItem, addCartProduct, addTotalPrice, AppDispatch, removeCartItem, removeCartProduct, RootState } from "../../store/store";
 import { IitemCard } from "../../types";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 const priceStack = {
   display: "flex",
@@ -35,9 +35,13 @@ const ItemCard = (props: IitemCard) => {
     console.log("cI", cartItem)
     if(addInCart){
       dispatch(removeCartItem(id));
+      dispatch(removeCartProduct(id));
+      dispatch(addTotalPrice());
       
     }else {
       dispatch(addCartItem(id));
+      dispatch(addCartProduct(props));
+      dispatch(addTotalPrice());
     }
   }
 

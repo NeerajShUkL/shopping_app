@@ -1,5 +1,3 @@
-import React from "react";
-import "./App.css";
 import Navbar from "./component/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Cart, Checkout, Home, LoginPage, Profile } from "./pages";
@@ -8,7 +6,7 @@ import Footer from "./component/Footer";
 
 function App() {
   return (
-    <Box>
+    <Box sx={{position: "relative", height: "100vh",}}>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -19,8 +17,9 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/cart/checkout" element={<Checkout />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
-      <Footer />
+      
     </Box>
   );
 }

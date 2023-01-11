@@ -6,6 +6,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../store/store';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -47,13 +50,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC = () => { 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const {cartItem, cartProduct } = useSelector((state: RootState) => state.cart);
+
+  const nevigate = useNavigate()
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -71,6 +80,10 @@ const Navbar: React.FC = () => {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const handleShoppingCart = () => {
+      nevigate("/cart")
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -114,10 +127,11 @@ const Navbar: React.FC = () => {
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
+          aria-label={`show ${cartItem.length} new notifications`}
           color="inherit"
+          onClick={handleShoppingCart}
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={cartItem?.length} color="error">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -148,6 +162,7 @@ const Navbar: React.FC = () => {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={() => nevigate("/shopping_app")}
           >
             <MenuIcon />
           </IconButton>
@@ -155,7 +170,8 @@ const Navbar: React.FC = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            sx={{ display: { xs: 'none', sm: 'block' }, cursor: "pointer", }}
+            onClick={() => nevigate("/")}
           >
             NS Shop
           </Typography>
@@ -172,10 +188,11 @@ const Navbar: React.FC = () => {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label={`show ${cartItem?.length} new notifications`}
               color="inherit"
+              onClick={handleShoppingCart}
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={cartItem?.length} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

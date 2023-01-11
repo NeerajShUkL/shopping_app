@@ -12,8 +12,8 @@ import {
 import { ReactNode, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addCartProduct,
   AppDispatch,
-  fetchCartProdudctData,
   fetchProdudctData,
   fetchProdudctDataCategory,
   RootState,
@@ -53,12 +53,6 @@ const Home: React.FC = () => {
     }
   }, [category]);
 
-  useEffect(() => {
-    if (cartItem) {
-      cartItem.map((id: number) => dispatch(fetchCartProdudctData(id)));
-    }
-  }, [cartItem]);
-
   const cardContainer =
     products &&
     products?.map((productData: Product) => {
@@ -90,7 +84,7 @@ const Home: React.FC = () => {
 
   console.log("products", products);
   return (
-    <Box sx={{ flexGrow: 1, m: "auto", marginTop: 3, p: 3 }}>
+    <Box sx={{ flexGrow: 1, m: "auto", mt: 3, p: 3 }}>
       <Grid container sx={filterGrid}>
         <Typography
           display="inline"
@@ -127,7 +121,7 @@ const Home: React.FC = () => {
       </Grid>
       <Grid
         container
-        sx={{ justifyContent: "center", alignItems: "center" }}
+        sx={{ justifyContent: "start", alignItems: "center",  }}
         spacing={2}
       >
         {cardContainer}
