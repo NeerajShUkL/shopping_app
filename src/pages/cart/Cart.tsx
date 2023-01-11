@@ -13,14 +13,14 @@ const Cart: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
     const {cartItem, cartProduct } = useSelector((state: RootState) => state.cart);
-     console.log("cI", cartItem)
-     console.log("cp", cartProduct)
+    //  console.log("cI", cartItem)
+    //  console.log("cp", cartProduct)
 
   const carTData =
   cartProduct &&
   cartProduct?.map((productData: Product) => {
     let bool = false;
-      cartItem.map((fid: number) => {
+      cartItem?.map((fid: number) => {
           if (fid === productData.id) {
             bool = true;
           }
@@ -44,12 +44,12 @@ const Cart: React.FC = () => {
       </Grid>
     );
   });
-  useEffect(() => {
-    if(cartItem){
-      cartItem.map((id: number) => dispatch(fetchCartProdudctData(id)) )
-    }
+  // useEffect(() => {
+  //   if(cartItem){
+  //     cartItem?.map((id: number) => dispatch(fetchCartProdudctData(id)) )
+  //   }
 
-  },[cartItem])
+  // },[cartItem])
   return (
     <Box sx={{ flexGrow: 1, m: "auto", marginTop: 3, p: 3 }}>
     <Grid

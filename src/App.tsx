@@ -12,7 +12,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" index element={<Home />} />
+          <Route index element={<Home />} />
+          <Route path="/shopping_app" element={<Home />} />
           <Route path="/credential" element={<LoginPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />

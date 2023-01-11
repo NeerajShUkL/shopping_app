@@ -30,19 +30,21 @@ export interface CartState {
     reducers: {
       addCartItem: (state, action: PayloadAction<number>) => {
         console.log("ciinS", action.payload)
-        state.cartItem.push(action.payload)
+        state.cartItem?.push(action.payload)
       },
       removeCartItem: (state, action: PayloadAction<number>) => {
         console.log("ciinS", action.payload)
-        state.cartItem.splice(
-          state.cartItem.findIndex((fid: number) => fid === action.payload),
+        state.cartItem?.splice(
+          state.cartItem?.findIndex((fid: number) => fid === action.payload),
           1
         );
       },
      },
     extraReducers: (builder) => {
-      builder.addCase(fetchCartProdudctData.fulfilled, (state, action) => {
-        state.cartProduct.push = action.payload
+      builder.addCase(fetchCartProdudctData.fulfilled, (state, action: PayloadAction<Product>) => {
+        const newCartProduct = initialState.cartProduct
+        // console.log("abc", newCartProduct)
+        state.cartProduct = [...newCartProduct , action.payload]
       })
     },
   })

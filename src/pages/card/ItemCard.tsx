@@ -28,10 +28,11 @@ const ItemCard = (props: IitemCard) => {
 
     const {cartItem, cartProduct } = useSelector((state: RootState) => state.cart);
 
-    console.log("cI", cartItem)
-     console.log("cp", cartProduct)
+    // console.log("cI", cartItem)
+    //  console.log("cp", cartProduct)
 
   const handleCartAddItem = () => {
+    console.log("cI", cartItem)
     if(addInCart){
       dispatch(removeCartItem(id));
       
@@ -40,12 +41,12 @@ const ItemCard = (props: IitemCard) => {
     }
   }
 
-  useEffect(() => {
-    if(cartItem){
-      cartItem.map((id: number) => dispatch(fetchCartProdudctData(id)) )
-    }
+  // useEffect(() => {
+  //   if(cartItem){
+  //     cartItem?.map((id: number) => dispatch(fetchCartProdudctData(id)) )
+  //   }
 
-  },[cartItem])
+  // },[cartItem])
 
   return (
     <Card sx={{ maxWidth: 300, margin: 'auto', p: 1 }}>
@@ -63,7 +64,7 @@ const ItemCard = (props: IitemCard) => {
         />
         <Typography sx={priceStack}>  {title?.length <= 18
               ? title
-              : title.substring(0, 25) + "..."} </Typography>
+              : title?.substring(0, 25) + "..."} </Typography>
         <Stack sx={priceStack}>
           <Typography
             display="inline"
@@ -83,7 +84,7 @@ const ItemCard = (props: IitemCard) => {
 
             onClick={handleCartAddItem}
           >
-            {addInCart? <AddShoppingCartIcon /> : <RemoveShoppingCartIcon />}
+            {addInCart? <RemoveShoppingCartIcon />:  <AddShoppingCartIcon />}
           </IconButton>
         </Stack>
       </CardActionArea>
