@@ -45,7 +45,8 @@ export interface CartState {
         );
       },
       addTotalPrice: (state) => {
-        state.totalPrice = state.cartProduct?. reduce( (accumulator, item) => { return accumulator + Number(item. price); }, 0);
+        const total: number = state.cartProduct?. reduce( (accumulator, item) => { return accumulator + Number(item. price); }, 0);
+        state.totalPrice = Number(total.toFixed(2))
       }
       
      },

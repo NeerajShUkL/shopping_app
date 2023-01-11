@@ -84,7 +84,7 @@ const Home: React.FC = () => {
 
   console.log("products", products);
   return (
-    <Box sx={{ flexGrow: 1, m: "auto", mt: 3, p: 3 }}>
+    <Box sx={{ flexGrow: 1, minHeight: "70%", m: "auto", mt: 3, p: 3 }}>
       <Grid container sx={filterGrid}>
         <Typography
           display="inline"

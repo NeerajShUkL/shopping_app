@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import { filterGrid, ItemCard, productCardGrid } from "..";
 import { IitemCard, Product } from "../../types";
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { useNavigate } from "react-router-dom";
 
 const Cart: React.FC = () => {
+
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
   const { cartItem, cartProduct, totalPrice } = useSelector(
@@ -14,18 +18,20 @@ const Cart: React.FC = () => {
   //  console.log("cI", cartItem)
   //  console.log("cp", cartProduct)
 
-  const warning =  <Box
-  sx={{
-    display: "flex",
-    margin: "auto",
-    alignItems: "center",
-    justifyContent: "center",
-  }}
->
-  <Paper elevation={0}>
-    <h3>There is no Item</h3>
-  </Paper>
-</Box>
+  const warning = (
+    <Box
+      sx={{
+        display: "flex",
+        margin: "auto",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Paper elevation={0} sx={{ backgroundColor: "rgb(235, 235, 235)" }}>
+        <h3>There is no Item</h3>
+      </Paper>
+    </Box>
+  );
 
   const carTData =
     cartProduct &&
@@ -57,25 +63,30 @@ const Cart: React.FC = () => {
     });
 
   return (
-    <Box sx={{ flexGrow: 1, m: "auto", marginTop: 3, p: 3 }}>
+    <Box sx={{ flexGrow: 1, m: "auto", marginTop: 10, minHeight: "70%", p: 3 }}>
       <Grid
         container
         sx={{ justifyContent: "start", alignItems: "center" }}
         spacing={2}
       >
-        {cartItem?.length === 0 ? warning : carTData }
+        {cartItem?.length === 0 ? warning : carTData}
       </Grid>
       <Grid container sx={filterGrid}>
-        <Typography
-          display="inline"
-          text-align="left"
-          variant="h6"
-          sx={{ maxWidth: 300 }}
-        >
-          Total: ${totalPrice}
-        </Typography>
+        <Box display="inline" text-align="left">
+          <Typography
+            // display="inline"
+            // text-align="left"
+            variant="h6"
+            sx={{ maxWidth: 300 }}
+          >
+            Total: ${totalPrice}
+          </Typography>
+        </Box>
         <Box display="inline" text-align="Right">
-          
+          <Button variant="contained" disabled={!cartItem?.length} onClick={() => navigate("/cart/checkout")}>
+            <ShoppingCartCheckoutIcon />
+            Checkout
+          </Button>
         </Box>
       </Grid>
     </Box>

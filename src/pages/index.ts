@@ -18,8 +18,11 @@ export const categories: string[] = [
   export const filterGrid = {
     justifyContent: "space-between",
     width: "100%",
-    marginBottom: 2,
+    marginTop: 5,
+    p: 2,
     alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 1.5,
   };
   
  export const productCardGrid = {
