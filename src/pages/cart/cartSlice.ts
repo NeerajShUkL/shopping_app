@@ -33,6 +33,9 @@ export interface CartState {
           1
         );
       },
+      clearCart: (state) => {
+        state.cartItem = []
+      },
       addCartProduct: (state, action: PayloadAction<IitemCard>) => {
         console.log("ciinS", action.payload)
         state.cartProduct?.push(action.payload)
@@ -44,6 +47,9 @@ export interface CartState {
           1
         );
       },
+      clearCartProduct: (state) => {
+        state.cartProduct = []
+      },
       addTotalPrice: (state) => {
         const total: number = state.cartProduct?. reduce( (accumulator, item) => { return accumulator + Number(item. price); }, 0);
         state.totalPrice = Number(total.toFixed(2))
@@ -53,6 +59,6 @@ export interface CartState {
    
   })
   
-  export const { addCartItem, removeCartItem, addCartProduct, removeCartProduct, addTotalPrice } = cartSlice.actions
+  export const { addCartItem, removeCartItem, addCartProduct, removeCartProduct, addTotalPrice, clearCart, clearCartProduct } = cartSlice.actions
   
   export default cartSlice.reducer

@@ -6,10 +6,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { filterGrid } from "..";
-import { AppDispatch, setCheckoutDetails } from "../../store/store";
+import { addCartItem, AppDispatch, RootState, setCheckoutDetails } from "../../store/store";
 import { ShippingAddres } from "../../types";
 
 
@@ -32,6 +32,10 @@ const Checkout: React.FC = () => {
     const { name, value } = e.target;
     setShippingDetails({ ...shippingDetails, [name]: value });
   };
+
+  const { cartItem} = useSelector(
+    (state: RootState) => state.cart
+  );
 
   const handleCheckoutFormSubmit = () => {
     nevigate('/cart/checkout/payment')
@@ -147,7 +151,7 @@ const Checkout: React.FC = () => {
             </Grid>
             <Button
               type="submit"
-              
+              disabled={!cartItem?.length}
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
