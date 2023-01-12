@@ -39,3 +39,13 @@ export interface Rating {
       image: string,
       price: string,
     }
+
+    export interface ShippingAddres {
+      fname: string;
+      lname: string;
+      address: string;
+      city: string;
+      zipcode: number | null;
+      phone: number | null;
+      state: string;
+    }

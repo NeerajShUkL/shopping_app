@@ -1,43 +1,8 @@
-import {
-  Box,
-  Button,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { filterGrid } from "..";
-import { AppDispatch, setCheckoutDetails } from "../../store/store";
-import { ShippingAddres } from "../../types";
+import { Box, Button, Grid, TextField, Typography } from '@mui/material'
+import React from 'react'
+import { filterGrid } from '..'
 
-
-
-const Checkout: React.FC = () => {
-  const [shippingDetails, setShippingDetails] = useState<ShippingAddres>({
-    fname: "",
-    lname: "",
-    address: "",
-    city: "",
-    zipcode: null,
-    phone: null,
-    state: "",
-  });
-
-  const nevigate = useNavigate()
-  const dispatch = useDispatch<AppDispatch>();
-
-  const handleShippingAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setShippingDetails({ ...shippingDetails, [name]: value });
-  };
-
-  const handleCheckoutFormSubmit = () => {
-    nevigate('/cart/checkout/payment')
-    dispatch(setCheckoutDetails(shippingDetails))
-  }
-
+const Payment = () => {
   return (
     <Box sx={{ flexGrow: 1, m: "auto", marginTop: 10, minHeight: "70%", p: 3 }}>
       <Grid container sx={filterGrid}>
@@ -48,11 +13,11 @@ const Checkout: React.FC = () => {
             variant="h6"
             sx={{ maxWidth: 300 }}
           >
-            Checkout Details
+            Payment Details
           </Typography>
         </Box>
       </Grid>
-      <Box component="form" onSubmit={handleCheckoutFormSubmit} sx={{ mt: 3, backgroundColor: "white", p: 3, }}>
+      <Box component="form"  sx={{ mt: 3, backgroundColor: "white", p: 3, }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -62,8 +27,8 @@ const Checkout: React.FC = () => {
                   fullWidth
                   type="text"
                   id="fname"
-                  value={shippingDetails.fname}
-                  onChange={handleShippingAddress}
+                //   value={shippingDetails.fname}
+                //   onChange={handleShippingAddress}
                   label="First Name"
                   autoFocus
                 />
@@ -77,8 +42,8 @@ const Checkout: React.FC = () => {
                   label="Last Name"
                   name="lname"
                   autoComplete="family-name"
-                  value={shippingDetails.lname}
-                  onChange={handleShippingAddress}
+                //   value={shippingDetails.lname}
+                //   onChange={handleShippingAddress}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -101,8 +66,8 @@ const Checkout: React.FC = () => {
                   type="text"
                   id="city"
                   autoComplete="new-city"
-                  value={shippingDetails.city}
-                  onChange={handleShippingAddress}
+                //   value={shippingDetails.city}
+                //   onChange={handleShippingAddress}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -114,8 +79,8 @@ const Checkout: React.FC = () => {
                   type="text"
                   id="state"
                   autoComplete="new-state"
-                  value={shippingDetails.state}
-                  onChange={handleShippingAddress}
+                //   value={shippingDetails.state}
+                //   onChange={handleShippingAddress}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -127,8 +92,8 @@ const Checkout: React.FC = () => {
                   type="number"
                   id="zipcode"
                   autoComplete="new-zipcode"
-                  value={shippingDetails.zipcode}
-                  onChange={handleShippingAddress}
+                //   value={shippingDetails.zipcode}
+                //   onChange={handleShippingAddress}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -140,8 +105,8 @@ const Checkout: React.FC = () => {
                   type="number"
                   id="phone"
                   autoComplete="new-phone"
-                  value={shippingDetails.phone}
-                  onChange={handleShippingAddress}
+                //   value={shippingDetails.phone}
+                //   onChange={handleShippingAddress}
                 />
               </Grid>
             </Grid>
@@ -155,7 +120,7 @@ const Checkout: React.FC = () => {
             </Button>
           </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Payment
