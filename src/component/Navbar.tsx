@@ -126,29 +126,14 @@ const Navbar: React.FC = () => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem  onClick={handleShoppingCart} >
-        <IconButton
-          size="large"
-          aria-label={`show ${cartItem.length} new notifications`}
-          color="inherit"
-          
-        >
           <Badge badgeContent={cartItem?.length} color="error">
             <ShoppingCartIcon />
           </Badge>
-        </IconButton>
-        <p>ShopingCart</p>
+        <p> ShopingCart</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
           <AccountCircleIcon />
-        </IconButton>
-        <p>Profile</p>
+        <p> Profile</p>
       </MenuItem>
     </Menu>
   );

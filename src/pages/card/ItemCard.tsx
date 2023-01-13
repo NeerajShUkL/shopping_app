@@ -32,7 +32,7 @@ const ItemCard = (props: IitemCard) => {
     //  console.log("cp", cartProduct)
 
   const handleCartAddItem = () => {
-    console.log("cI", cartItem)
+    // console.log("cI", cartItem)
     if(addInCart){
       dispatch(removeCartItem(id));
       dispatch(removeCartProduct(id));

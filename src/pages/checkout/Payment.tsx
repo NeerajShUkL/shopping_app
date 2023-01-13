@@ -207,7 +207,7 @@ const Payment: React.FC = () => {
       <Modal
         hideBackdrop
         open={showModal}
-        // onClose={handleCloseModal}
+        onClose={handleCloseModal}
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >

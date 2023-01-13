@@ -33,8 +33,8 @@ const Home: React.FC = () => {
     (state: RootState) => state.cart
   );
 
-  console.log("cI", cartItem);
-  console.log("cp", cartProduct);
+  // console.log("cI", cartItem);
+  // console.log("cp", cartProduct);
 
   const handleSelectedCategory = (
     e: SelectChangeEvent<string>,
@@ -82,7 +82,7 @@ const Home: React.FC = () => {
       );
     });
 
-  console.log("products", products);
+  // console.log("products", products);
   return (
     <Box sx={{ flexGrow: 1, minHeight: "70%", m: "auto", mt: 3, p: 3 }}>
       <Grid container sx={filterGrid}>

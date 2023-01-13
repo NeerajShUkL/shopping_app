@@ -15,7 +15,7 @@ export interface CartState {
     totalPrice: 0,
   }
   
-  console.log("icis", initialState.cartItem)
+  // console.log("icis", initialState.cartItem)
 
 
   export const cartSlice = createSlice({
@@ -23,11 +23,11 @@ export interface CartState {
     initialState,
     reducers: {
       addCartItem: (state, action: PayloadAction<number>) => {
-        console.log("ciinS", action.payload)
+        // console.log("ciinS", action.payload)
         state.cartItem?.push(action.payload)
       },
       removeCartItem: (state, action: PayloadAction<number>) => {
-        console.log("ciinS", action.payload)
+        // console.log("ciinS", action.payload)
         state.cartItem?.splice(
           state.cartItem?.findIndex((fid: number) => fid === action.payload),
           1
@@ -37,11 +37,11 @@ export interface CartState {
         state.cartItem = []
       },
       addCartProduct: (state, action: PayloadAction<IitemCard>) => {
-        console.log("ciinS", action.payload)
+        // console.log("ciinS", action.payload)
         state.cartProduct?.push(action.payload)
       },
       removeCartProduct: (state, action: PayloadAction<number>) => {
-        console.log("ciinS", action.payload)
+        // console.log("ciinS", action.payload)
         state.cartProduct?.splice(
           state.cartProduct?.findIndex((fid: IitemCard) => fid.id === action.payload),
           1
