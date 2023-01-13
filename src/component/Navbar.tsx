@@ -125,12 +125,12 @@ const Navbar: React.FC = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem  onClick={handleShoppingCart} >
         <IconButton
           size="large"
           aria-label={`show ${cartItem.length} new notifications`}
           color="inherit"
-          onClick={handleShoppingCart}
+          
         >
           <Badge badgeContent={cartItem?.length} color="error">
             <ShoppingCartIcon />
