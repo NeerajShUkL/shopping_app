@@ -50,7 +50,7 @@ const Home: React.FC = () => {
     } else {
       dispatch(fetchProdudctData());
     }
-  }, [category, dispatch]);
+  }, [category]);
 
   const cardContainer =
     products &&
@@ -59,8 +59,6 @@ const Home: React.FC = () => {
       cartItem.map((fid: number) => {
         if (fid === productData.id) {
          return  bool = true;
-        }else{
-          return bool = false
         }
       });
       return (

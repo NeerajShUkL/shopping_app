@@ -38,8 +38,6 @@ const Cart: React.FC = () => {
       cartItem?.map((fid: number) => {
         if (fid === productData.id) {
          return  bool = true;
-        }else{
-          return bool = false
         }
       });
       return (
