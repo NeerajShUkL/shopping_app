@@ -28,7 +28,7 @@ export interface Rating {
   }
   
   export interface HomeState {
-      products: Product[],
+      products: Array<Product>,
       category: string,
     }
 

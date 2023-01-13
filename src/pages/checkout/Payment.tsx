@@ -102,9 +102,9 @@ const Payment: React.FC = () => {
           {cartProduct?.map((product: IitemCard) => (
             <StyledTableRow key={product?.title}>
               <StyledTableCell component="th" scope="row">
-                {product?.title.length >= 12
+                {product?.title.length <= 40
                   ? product?.title
-                  : product?.title.substring(0, 12) + "..."}
+                  : product?.title.substring(0, 40) + "..."}
               </StyledTableCell>
               <StyledTableCell align="right">${product?.price}</StyledTableCell>
             </StyledTableRow>

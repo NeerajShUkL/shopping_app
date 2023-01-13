@@ -4,8 +4,8 @@ import axios from 'axios'
 import { PRODUCT_API } from '../../utils/utils'
 
 export interface CartState {
-    cartItem: number[],
-    cartProduct: IitemCard[],
+    cartItem: Array<number>,
+    cartProduct: Array<IitemCard>,
     totalPrice: number,
   }
   
