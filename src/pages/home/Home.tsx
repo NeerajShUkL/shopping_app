@@ -9,10 +9,9 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addCartProduct,
   AppDispatch,
   fetchProdudctData,
   fetchProdudctDataCategory,
@@ -29,7 +28,7 @@ const Home: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { products, category } = useSelector((state: RootState) => state.home);
-  const { cartItem, cartProduct } = useSelector(
+  const { cartItem } = useSelector(
     (state: RootState) => state.cart
   );
 
@@ -51,7 +50,7 @@ const Home: React.FC = () => {
     } else {
       dispatch(fetchProdudctData());
     }
-  }, [category]);
+  }, [category, dispatch]);
 
   const cardContainer =
     products &&
@@ -59,7 +58,9 @@ const Home: React.FC = () => {
       let bool = false;
       cartItem.map((fid: number) => {
         if (fid === productData.id) {
-          bool = true;
+         return  bool = true;
+        }else{
+          return bool = false
         }
       });
       return (
@@ -121,7 +122,7 @@ const Home: React.FC = () => {
       </Grid>
       <Grid
         container
-        sx={{ justifyContent: "start", alignItems: "center",  }}
+        sx={{ justifyContent: "start", alignItems: "center" }}
         spacing={2}
       >
         {cardContainer}

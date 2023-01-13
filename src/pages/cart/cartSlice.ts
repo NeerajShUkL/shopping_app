@@ -1,7 +1,5 @@
-import { IitemCard, Product } from './../../types';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import axios from 'axios'
-import { PRODUCT_API } from '../../utils/utils'
+import { IitemCard } from './../../types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface CartState {
     cartItem: Array<number>,
@@ -51,7 +49,7 @@ export interface CartState {
         state.cartProduct = []
       },
       addTotalPrice: (state) => {
-        const total: number = state.cartProduct?. reduce( (accumulator, item) => { return accumulator + Number(item. price); }, 0);
+        const total: number = state.cartProduct?.reduce((accumulator, item) => { return accumulator + Number(item.price); }, 0);
         state.totalPrice = Number(total.toFixed(2))
       }
       

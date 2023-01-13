@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { filterGrid } from "..";
-import { addCartItem, AppDispatch, RootState, setCheckoutDetails } from "../../store/store";
+import { AppDispatch, RootState, setCheckoutDetails } from "../../store/store";
 import { ShippingAddres } from "../../types";
 
 

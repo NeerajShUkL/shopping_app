@@ -1,9 +1,13 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { flexbox } from "@mui/system";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterGrid } from "..";
-import { AppDispatch, clearCart, clearCartProduct, RootState } from "../../store/store";
+import {
+  AppDispatch,
+  clearCart,
+  clearCartProduct,
+  RootState,
+} from "../../store/store";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,8 +21,8 @@ import { useNavigate } from "react-router-dom";
 import { IitemCard } from "../../types";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs, { Dayjs } from 'dayjs';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 interface PaymentDetail {
   cardNo: number | string;
@@ -64,7 +68,7 @@ const style = {
 const Payment: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [value, setValue] = React.useState<Dayjs | null>(
-    dayjs('2023-01-12T21:11:54'),
+    dayjs("2023-01-12T21:11:54")
   );
 
   const handleChangeDate = (newValue: Dayjs | null) => {
@@ -76,7 +80,7 @@ const Payment: React.FC = () => {
     expiryDate: value,
   });
 
-  const { cartItem, cartProduct, totalPrice } = useSelector(
+  const { cartProduct, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
 
@@ -99,30 +103,34 @@ const Payment: React.FC = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {cartProduct?.map((product: IitemCard) => (
-            <StyledTableRow key={product?.title}>
-              <StyledTableCell component="th" scope="row">
-                {product?.title.length <= 40
-                  ? product?.title
-                  : product?.title.substring(0, 40) + "..."}
-              </StyledTableCell>
-              <StyledTableCell align="right">${product?.price}</StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {cartProduct?.map((product: IitemCard) => {
+            return (
+              <StyledTableRow key={product?.title}>
+                <StyledTableCell component="th" scope="row">
+                  {product?.title.length <= 40
+                    ? product?.title
+                    : product?.title.substring(0, 40) + "..."}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  ${product?.price}
+                </StyledTableCell>
+              </StyledTableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
   );
 
-  const handlePaymentSubmittion = (e: React.SyntheticEvent ) => {
+  const handlePaymentSubmittion = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    dispatch(clearCart())
-    dispatch(clearCartProduct())
+    dispatch(clearCart());
+    dispatch(clearCartProduct());
     nevigate("/");
   };
   return (
@@ -149,15 +157,12 @@ const Payment: React.FC = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Box
-           component="form"
+            component="form"
             sx={{ mt: 3, p: 3 }}
             onSubmit={handlePaymentSubmittion}
           >
-             
             <Grid container spacing={2}>
-                
               <Grid item xs={12}>
-            
                 <TextField
                   autoComplete="given-number"
                   name="cardNo"
@@ -185,22 +190,21 @@ const Payment: React.FC = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DesktopDatePicker
-                //   required
-                  label="Date desktop"
-                  inputFormat="MM/DD/YYYY"
-                  value={value}
-                  onChange={handleChangeDate}
-                  renderInput={(params: any) => <TextField {...params} />}
-                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DesktopDatePicker
+                    //   required
+                    label="Date desktop"
+                    inputFormat="MM/DD/YYYY"
+                    value={value}
+                    onChange={handleChangeDate}
+                    renderInput={(params: any) => <TextField {...params} />}
+                  />
                 </LocalizationProvider>
               </Grid>
             </Grid>
             <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
               Pay ${totalPrice}
             </Button>
-         
           </Box>
         </Grid>
       </Grid>

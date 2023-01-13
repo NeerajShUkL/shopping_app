@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { filterGrid, ItemCard, productCardGrid } from "..";
-import { IitemCard, Product } from "../../types";
+import { IitemCard } from "../../types";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { useNavigate } from "react-router-dom";
 
 const Cart: React.FC = () => {
-
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
 
   const { cartItem, cartProduct, totalPrice } = useSelector(
     (state: RootState) => state.cart
@@ -39,7 +37,9 @@ const Cart: React.FC = () => {
       let bool = false;
       cartItem?.map((fid: number) => {
         if (fid === productData.id) {
-          bool = true;
+         return  bool = true;
+        }else{
+          return bool = false
         }
       });
       return (
@@ -83,7 +83,11 @@ const Cart: React.FC = () => {
           </Typography>
         </Box>
         <Box display="inline" text-align="Right">
-          <Button variant="contained" disabled={!cartItem?.length} onClick={() => navigate("/cart/checkout")}>
+          <Button
+            variant="contained"
+            disabled={!cartItem?.length}
+            onClick={() => navigate("/cart/checkout")}
+          >
             <ShoppingCartCheckoutIcon />
             Checkout
           </Button>

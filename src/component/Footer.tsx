@@ -1,16 +1,13 @@
-import { BottomNavigation, Typography, Paper } from "@mui/material";
+import { Typography, Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { relative } from "path";
-
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../store/store";
 
 const Footer: React.FC = () => {
-  const { cartItem } = useSelector((state: RootState) => state.cart);
+  // const { cartItem } = useSelector((state: RootState) => state.cart);
 
-  const footerPosition = cartItem?.length === 0 ? "absolute" : "relative";
   return (
     <Paper
       sx={{
