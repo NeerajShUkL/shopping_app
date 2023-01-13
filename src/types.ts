@@ -45,7 +45,7 @@ export interface Rating {
       lname: string;
       address: string;
       city: string;
-      zipcode: number | null;
-      phone: number | null;
+      zipcode: number | string;
+      phone: number | string;
       state: string;
     }

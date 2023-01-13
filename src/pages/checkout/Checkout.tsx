@@ -20,8 +20,8 @@ const Checkout: React.FC = () => {
     lname: "",
     address: "",
     city: "",
-    zipcode: null,
-    phone: null,
+    zipcode: "",
+    phone: "",
     state: "",
   });
 
@@ -37,7 +37,8 @@ const Checkout: React.FC = () => {
     (state: RootState) => state.cart
   );
 
-  const handleCheckoutFormSubmit = () => {
+  const handleCheckoutFormSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     nevigate('/cart/checkout/payment')
     dispatch(setCheckoutDetails(shippingDetails))
   }
