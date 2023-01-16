@@ -84,7 +84,7 @@ const Navbar: React.FC = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    nevigate("/profile");
+    nevigate("/credential");
   };
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
